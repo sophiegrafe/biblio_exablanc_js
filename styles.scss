@@ -45,7 +45,7 @@ section {
 .card {
   background-color: whitesmoke;
   width: 15vw;
-  height: 40vh;
+  height: 45vh;
   padding: 10px;
   margin: 10px;
 }
@@ -59,4 +59,23 @@ section {
   margin: auto;
   width: 95%;
   text-align: center;
+}
+.card-btn-info {
+  color: whitesmoke;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: 5px;
+  padding: 3px;
+}
+
+.card-btn-reserver {
+  color: whitesmoke;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: 5px;
+  padding: 3px;
 }
