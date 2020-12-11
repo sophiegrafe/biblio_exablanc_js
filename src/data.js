@@ -34,7 +34,7 @@ export const books = [
     titre: '20th century boys',
     disponible: true,
     resume:
-      "Menacée d'extinction à la fin du XXème siècle, l'humanité ne serait pas entrée dans le nouveau millénaire sans eux...\n ",
+      "Menacée d'extinction à la fin du XXème siècle, l'humanité ne serait pas entrée dans le nouveau millénaire sans eux... ",
     auteur: ['Naoki Urasawa'],
     categorie: 'bd',
     image: '20th-century-boys-t01.jpg',
