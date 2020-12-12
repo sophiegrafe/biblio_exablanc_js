@@ -62,25 +62,113 @@ app.innerHTML = titreSite + divPanier
 
 /* -------------------EVENTS-------------------------*/
 
-const lesBtnInfo = document.querySelectorAll('.card-btn-info');
-for (const btn of lesBtnInfo) {
-  btn.addEventListener('click', () => {
-    const btnId = btn.parentNode.querySelector('.idCard').innerHTML;
-    console.log(btnId);
+/* +++++++++ Fonction pour générer des popups Info +++++++*/
+/** ***************** version 1 *************************** */
+// function popupTraitment() {
+//   const lesBtnInfo = document.querySelectorAll('.card-btn-info');
+//   for (const btn of lesBtnInfo) {
+//     btn.addEventListener('click', () => {
+//       const btnIdStr = btn.parentNode.querySelector('.idCard').innerHTML;
+//       const btnId = parseInt(btnIdStr, 10);
+//       let popupInfo = '';
+//       books.forEach((el) => {
+//         if (btnId === el.id) {
+//           popupInfo += `
+//         <div id="popupInfo">
+//           <i class="far fa-times-circle"></i>
+//           <img class="card_img" src="images/${el.image}" alt=""/>
+//           <h3>${el.titre}</h3>
+//           <h4>Auteur : ${el.auteur[0]}, ${el.auteur[1]}</h4>
+//           <p>${el.resume}</p>
+//           <h5>Disponible : ${el.disponible ? 'oui' : 'non'}</h5>
+//         </div>`;
+//           app.innerHTML += popupInfo;
+//           const closeCrossPopup = document.querySelector('.fa-times-circle');
+//           closeCrossPopup.addEventListener('click', () => {
+//             const popupInfoToRemove = document.querySelector('#popupInfo');
+//             popupInfoToRemove.remove();
+//           });
+//         }
+//       });
+//     });
+//   }
+// }
+// popupTraitment();
 
-    // const popupInfo = `
-    // <div>
-    //   <h3>${}</h3>
+// document.body.addEventListener('click', (e) => {
+//   if (e.target.matches('.card-btn-info')) {
+//     popupTraitment();
+//   }
+// });
 
-    // </div>`;
-  });
-}
+/** ************************ version 2 ******************************* */
+// (problème pour relancer la fonction popupTraitement()
+// utilisation d'un delegate qui va chercher la même classe que la fonction --> '.card-btn-info'
+// j'essaye de simplifier la fonction à partir de là */
+// function popupTraitment(btn) {
+//   const btnIdStr = btn.target.parentNode.querySelector('.idCard').innerHTML;
+//   const btnId = parseInt(btnIdStr, 10);
+//   books.forEach((el) => {
+//     if (btnId === el.id) {
+//       const popupInfo = `
+//         <div id="popupInfo">
+//           <i class="far fa-times-circle"></i>
+//           <img class="card_img" src="images/${el.image}" alt=""/>
+//           <h3>${el.titre}</h3>
+//           <h4>${el.auteur[1] !== undefined
+//           ? `Auteurs : ${el.auteur[0]}, ${el.auteur[1]}`
+//           : `Auteur : ${el.auteur[0]}`}</h4>
+//           <p>${el.resume}</p>
+//           <h5>Disponible : ${el.disponible ? 'oui' : 'non'}</h5>
+//         </div>`;
+//       app.innerHTML += popupInfo;
+//       const closeCrossPopup = document.querySelector('.fa-times-circle');
+//       closeCrossPopup.addEventListener('click', () => {
+//         const popupInfoToRemove = document.querySelector('#popupInfo');
+//         popupInfoToRemove.remove();
+//       });
+//     }
+//   });
+// }
+// document.body.addEventListener('click', (btn) => {
+//   if (btn.target.matches('.card-btn-info')) {
+//     popupTraitment(btn);
+//   }
+// });
 
+/** ************************ version 3 ******************************* */
+// tout en un
+document.body.addEventListener('click', (btn) => {
+  if (btn.target.matches('.card-btn-info')) {
+    const btnIdStr = btn.target.parentNode.querySelector('.idCard').innerHTML;
+    const btnId = parseInt(btnIdStr, 10);
+    books.forEach((el) => {
+      if (btnId === el.id) {
+        const popupInfo = `
+        <div id="popupInfo">
+          <i class="far fa-times-circle"></i>
+          <img class="card_img" src="images/${el.image}" alt=""/>
+          <h3>${el.titre}</h3>
+          <h4>${el.auteur[1] !== undefined ? `Auteurs : ${el.auteur[0]}, ${el.auteur[1]}` : `Auteur : ${el.auteur[0]}`}</h4>        
+          <p>${el.resume}</p>
+          <h5>Disponible : ${el.disponible ? 'oui' : 'non'}</h5>    
+        </div>`;
+        app.innerHTML += popupInfo;
+        const closeCrossPopup = document.querySelector('.fa-times-circle');
+        closeCrossPopup.addEventListener('click', () => {
+          const popupInfoToRemove = document.querySelector('#popupInfo');
+          popupInfoToRemove.remove();
+        });
+      }
+    });
+  }
+});
+
+// Fonction pour traiter la réservation
 const lesBtnReserver = document.querySelectorAll('.card-btn-reserver');
 for (const btn of lesBtnReserver) {
   btn.addEventListener('click', () => {
     const btnId = btn.parentNode.querySelector('.idCard').innerHTML;
-    console.log(btnId);
   });
 }
 
